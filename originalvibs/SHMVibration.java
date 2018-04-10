@@ -55,7 +55,7 @@ public class SHMVibration extends SingleVibration {
 		this.freqEnd = freqEnd;
 	}
 
-	public void setFreqBegin(double freqBegin, double freqEnd) {
+	public void setFreq(double freqBegin, double freqEnd) {
 		this.freqBegin = freqBegin;
 		this.freqEnd = freqEnd;
 	}
@@ -69,6 +69,13 @@ public class SHMVibration extends SingleVibration {
 	}
 
 	public void initAmpFreq(VariationF ampF, VariationF freqF){
+		try{
+			ampF = ampF.getClass().newInstance();
+			freqF = freqF.getClass().newInstance();
+		}catch(Exception e){
+			throw new RuntimeException("Error when init SHMVibration");
+		}
+		
 		ampF.init(ampBegin, ampEnd, duration);
 		freqF.init(freqBegin, freqEnd, duration);
 		this.ampF = ampF;
@@ -78,7 +85,6 @@ public class SHMVibration extends SingleVibration {
 	@Override
 	public double s(double t) {
 		return ampF.f(t) * Math.sin(2*Math.PI*(phaseBegin + freqF.fIntegral(t)));
-
 	}
 
 }

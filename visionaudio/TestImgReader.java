@@ -18,7 +18,6 @@ import static visionaudio.U.ac;
 import static visionaudio.U.as;
 import static visionaudio.U.defun;
 import static visionaudio.U.t;
-import static visionaudio.U.toa;
 import static visionaudio.U.trm;
 import static visionaudio.V.add;
 import static visionaudio.V.mR;
@@ -36,11 +35,9 @@ import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -49,6 +46,9 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 import javax.swing.JFrame;
 
+import originalvibs.HarmonicSeries;
+import originalvibs.SHMVibration;
+import originalvibs.VariationF;
 import visionaudio.WaveMaker.InputPoint;
 import visionaudio.outils.WaveFileWriter;
 import visionaudio.outils.format.DataTransformer;
@@ -285,7 +285,10 @@ class Drawer{
 
 //		testSimpleWaveMaker_Points();
 //		testSimpleWaveMaker_Image();
-		testSimpleWaveMaker_toFile();
+//		testSimpleWaveMaker_toFile();
+		
+//		testSingleVibration();
+		testComplexVibration();
 	}
 
 	static Date crtTime = new Date();
@@ -371,6 +374,64 @@ class Drawer{
 		
 	}
 
+
+	public void testSingleVibration(){
+
+		int yc = h/2;
+
+		pt.setColor(Color.black);
+		Integer pCentre = null;
+		int step = 1;
+		int max = h/2-10;
+		
+		SHMVibration vib = new SHMVibration();
+		vib.setPhaseBegin(0);
+		vib.setDuration(1);
+		vib.setAmp(1, 1);
+		vib.setFreq(50, 0);
+		vib.setReadingSimpleRate(w);
+		vib.initAmpFreq(new VariationF.LinearVF(), new VariationF.LinearVF());
+		
+		for(int i=0; i<=w; i++){
+			double vi = vib.readSByFrame(i);
+			if(pCentre!=null){
+				pt.drawLine(i-1, pCentre+yc, i, new Double(max*vi).intValue()+yc);
+			}
+			
+			pCentre = new Double(max*vi).intValue();
+		}
+		
+		
+		
+		
+	}
+
+	
+	public void testComplexVibration(){
+
+		int yc = h/2;
+
+		pt.setColor(Color.black);
+		Integer pCentre = null;
+		int step = 1;
+		int max = h/2-10;
+		
+		HarmonicSeries harmonicSeries = new HarmonicSeries(10, 6, 1, w);
+		harmonicSeries.initVibList();
+		
+		for(int i=0; i<=w; i++){
+			double vi = harmonicSeries.readSByFrame(i);
+			if(pCentre!=null){
+				pt.drawLine(i-1, yc-pCentre, i, yc-new Double(max*vi).intValue());
+			}
+			
+			pCentre = new Double(max*vi).intValue();
+		}
+	}
+
+
+	
+	
 	public void testSimpleWaveMaker_Image(){
 		int deep = 16;
 		int rx = 5;
@@ -474,7 +535,7 @@ public class TestImgReader {
 
 //	static int w = 1900;
 //	static int h = 1000;
-	static int w = 1600;
+	static int w = 1200;
 	static int h = 600;
 
 	static Canvas cvs;
