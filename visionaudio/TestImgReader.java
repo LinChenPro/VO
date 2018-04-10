@@ -46,10 +46,10 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 import javax.swing.JFrame;
 
+import imagetransform.VirtualPoint;
 import originalvibs.HarmonicSeries;
 import originalvibs.SHMVibration;
 import originalvibs.VariationF;
-import visionaudio.WaveMaker.InputPoint;
 import visionaudio.outils.WaveFileWriter;
 import visionaudio.outils.format.DataTransformer;
 
@@ -283,12 +283,12 @@ class Drawer{
 		
 //		testImgReader();
 
-//		testSimpleWaveMaker_Points();
+		testSimpleWaveMaker_Points();
 //		testSimpleWaveMaker_Image();
 //		testSimpleWaveMaker_toFile();
 		
 //		testSingleVibration();
-		testComplexVibration();
+//		testComplexVibration();
 	}
 
 	static Date crtTime = new Date();
@@ -334,24 +334,24 @@ class Drawer{
 		WaveFormat wfm = new WaveFormat(44100, 2, WaveFormat.LITTLE_ENDIAN);
 		
 		WaveMaker svm = new SimpleWaveMaker(wfm, reader, 255);
-		InputPoint[] testPoints = {
-				new InputPoint(0, 0, 1),
+		VirtualPoint[] testPoints = {
+				new VirtualPoint(0, 0, 1),
 
-				new InputPoint(4, 0, 1),
-				new InputPoint(-4, 0, 1),
-				new InputPoint(0, -4, 1),
-				new InputPoint(0, 4, 1),
+				new VirtualPoint(4, 0, 1),
+				new VirtualPoint(-4, 0, 1),
+				new VirtualPoint(0, -4, 1),
+				new VirtualPoint(0, 4, 1),
 				
-				new InputPoint(4, 4, 8d/deep),
-				new InputPoint(-4, 4, 8d/deep),
-				new InputPoint(-4, -4, 8d/deep),
-				new InputPoint(4, -4, 8d/deep),
+				new VirtualPoint(4, 4, 8d/deep),
+				new VirtualPoint(-4, 4, 8d/deep),
+				new VirtualPoint(-4, -4, 8d/deep),
+				new VirtualPoint(4, -4, 8d/deep),
 		};
 
 		int yl = h/4;
 		int yr = 3*h/4;
 
-		pt.setColor(Color.black);
+		pt.setColor(Color.lightGray);
 		Integer pl = null;
 		Integer pr = null;
 		int step = wfm.getSimpleRate()/w;
@@ -411,7 +411,7 @@ class Drawer{
 
 		int yc = h/2;
 
-		pt.setColor(Color.black);
+		pt.setColor(Color.lightGray);
 		Integer pCentre = null;
 		int step = 1;
 		int max = h/2-10;
@@ -479,18 +479,18 @@ class Drawer{
 		WaveFormat wfm = new WaveFormat(44100, 16, WaveFormat.LITTLE_ENDIAN);
 		
 		WaveMaker svm = new SimpleWaveMaker(wfm, reader, 255);
-		InputPoint[] testPoints = {
-				new InputPoint(0, 0, 1),
+		VirtualPoint[] testPoints = {
+				new VirtualPoint(0, 0, 1),
 
-				new InputPoint(4, 0, 1),
-				new InputPoint(-4, 0, 1),
-//				new InputPoint(0, -4, 1),
-//				new InputPoint(0, 4, 1),
+				new VirtualPoint(4, 0, 1),
+				new VirtualPoint(-4, 0, 1),
+//				new VirtualPoint(0, -4, 1),
+//				new VirtualPoint(0, 4, 1),
 //				
-//				new InputPoint(4, 4, 8d/deep),
-//				new InputPoint(-4, 4, 8d/deep),
-//				new InputPoint(-4, -4, 8d/deep),
-//				new InputPoint(4, -4, 8d/deep),
+//				new VirtualPoint(4, 4, 8d/deep),
+//				new VirtualPoint(-4, 4, 8d/deep),
+//				new VirtualPoint(-4, -4, 8d/deep),
+//				new VirtualPoint(4, -4, 8d/deep),
 		};
 
 		

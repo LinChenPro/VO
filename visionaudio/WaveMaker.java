@@ -1,5 +1,7 @@
 package visionaudio;
 
+import imagetransform.VirtualPoint;
+
 public abstract class WaveMaker {
 	WaveFormat waveFormat;
 	ImageReader imageReader;
@@ -53,9 +55,9 @@ public abstract class WaveMaker {
 		return wave;
 	}
 
-	public double[] getWaveValue(InputPoint[] inputPoints, int frameIndex, int mode){
+	public double[] getWaveValue(VirtualPoint[] inputPoints, int frameIndex, int mode){
 		double[] wave = new double[2];
-		for(InputPoint inputPoint : inputPoints){
+		for(VirtualPoint inputPoint : inputPoints){
 			double[] waveXY = mode==
 					MODE_COLOR 
 					? getPixelColorWaveValue(inputPoint.getX(), inputPoint.getY(), inputPoint.getColor(), frameIndex)
@@ -76,52 +78,4 @@ public abstract class WaveMaker {
 	public double[] getGrayWaveValue(int frameIndex){
 		return getWaveValue(frameIndex, MODE_GRAY);
 	}
-	
-	static public class InputPoint{
-		int x;
-		int y;
-		double[] color;
-		double gray; 
-		
-		public InputPoint(int x, int y, double gray) {
-			this.x = x;
-			this.y = y;
-			this.gray = gray;
-			this.color = new double[]{gray, gray, gray};
-		}
-		public InputPoint(int x, int y, double[] color) {
-			this.x = x;
-			this.y = y;
-			this.color = color;
-			this.gray = ImageReader.toGray(color);
-		}
-		public double[] getColor() {
-			return color;
-		}
-		public void setColor(double[] color) {
-			this.color = color;
-		}
-		public double getGray() {
-			return gray;
-		}
-		public void setGray(double gray) {
-			this.gray = gray;
-		}
-		public int getX() {
-			return x;
-		}
-		public void setX(int x) {
-			this.x = x;
-		}
-		public int getY() {
-			return y;
-		}
-		public void setY(int y) {
-			this.y = y;
-		}
-		
-		
-		
-	}
-
 }

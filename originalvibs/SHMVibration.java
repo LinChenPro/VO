@@ -69,13 +69,6 @@ public class SHMVibration extends SingleVibration {
 	}
 
 	public void initAmpFreq(VariationF ampF, VariationF freqF){
-		try{
-			ampF = ampF.getClass().newInstance();
-			freqF = freqF.getClass().newInstance();
-		}catch(Exception e){
-			throw new RuntimeException("Error when init SHMVibration");
-		}
-		
 		ampF.init(ampBegin, ampEnd, duration);
 		freqF.init(freqBegin, freqEnd, duration);
 		this.ampF = ampF;
