@@ -1,6 +1,7 @@
 package visionaudio;
 
-import imagetransform.VirtualPoint;
+import virtualpresentation.VirtualDimension;
+import virtualpresentation.VirtualPoint;
 
 public abstract class WaveMaker {
 	WaveFormat waveFormat;
@@ -42,15 +43,16 @@ public abstract class WaveMaker {
 	
 	public double[] getWaveValue(int frameIndex, int mode){
 		double[] wave = new double[2];
-		for(int x=-imageReader.getRx()+1; x<imageReader.getRx(); x++){
-			for(int y=-imageReader.getRy()+1; y<imageReader.getRy(); y++){
+		VirtualDimension readerDimension = imageReader.getDimension();
+		for(int x=-readerDimension.getRx()+1; x<readerDimension.getRx(); x++){
+			for(int y=-readerDimension.getRy()+1; y<readerDimension.getRy(); y++){
 				double[] waveXY = mode==MODE_COLOR ? getPixelColorWaveValue(x, y, frameIndex) : getPixelGrayWaveValue(x, y, frameIndex); 
 				wave[0] += waveXY[0]; 
 				wave[1] += waveXY[1]; 
 			}
 		}
-		wave[0] /= imageReader.getOutWidth() * imageReader.getOutHeight(); 
-		wave[1] /= imageReader.getOutWidth() * imageReader.getOutHeight(); 
+		wave[0] /= readerDimension.getOutWidth() * readerDimension.getOutHeight(); 
+		wave[1] /= readerDimension.getOutWidth() * readerDimension.getOutHeight(); 
 		
 		return wave;
 	}

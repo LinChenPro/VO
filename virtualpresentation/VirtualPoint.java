@@ -1,4 +1,4 @@
-package imagetransform;
+package virtualpresentation;
 
 import visionaudio.ImageReader;
 

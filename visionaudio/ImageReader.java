@@ -3,14 +3,12 @@ package visionaudio;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+import virtualpresentation.VirtualDimension;
+
 public class ImageReader {
-	private int outWidth;
-	private int outHeight;
 	private int resolution;
 	private BufferedImage sourceImage;
-	
-	private int rx;
-	private int ry;
+	private VirtualDimension dimension;
 	
 	private Float stepX;
 	private Float stepY;
@@ -24,41 +22,16 @@ public class ImageReader {
 	public ImageReader(int outWidth, int outHeight, int resolution, BufferedImage sourceImage) {
 		this.resolution = resolution;
 		this.sourceImage = sourceImage;
-		setOutWidth(outWidth);
-		setOutHeight(outHeight);
+		setDimension(new VirtualDimension(outWidth, outHeight));
 		needInit = true;
 	}
 	
-	public int getOutWidth() {
-		return outWidth;
-	}
-	public void setOutWidth(int outWidth) {
-		this.outWidth = outWidth;
-		rx = (outWidth+1)/2;
-		needInit = true;
-	}
-	public int getOutHeight() {
-		return outHeight;
-	}
-	public void setOutHeight(int outHeight) {
-		this.outHeight = outHeight;
-		ry = (outHeight+1)/2;
-		needInit = true;
-	}
-	public void setoutSize(int w, int h){
-		setOutWidth(w);
-		setOutHeight(h);
-		needInit = true;
-	}
-	
-	
-	
-	public int getRx() {
-		return rx;
+	public VirtualDimension getDimension() {
+		return dimension;
 	}
 
-	public int getRy() {
-		return ry;
+	public void setDimension(VirtualDimension dimension) {
+		this.dimension = dimension;
 	}
 
 	public BufferedImage getSourceImage() {
@@ -76,22 +49,14 @@ public class ImageReader {
 		needInit = true;
 	}
 	
-	int toC0Pos(int v, int r){
-		return v+1-r;
-	}
-	
-	int toLT0Pos(int v, int r){
-		return v-1+r;
-	}
-		
 	private void initParams() {
 		if(needInit){
-			stepX = sourceImage.getWidth()/(float)outWidth;
-			stepY = sourceImage.getHeight()/(float)outHeight;		
+			stepX = sourceImage.getWidth()/(float)dimension.getOutWidth();
+			stepY = sourceImage.getHeight()/(float)dimension.getOutHeight();		
 			stepColor = 255/(float)resolution;
 			
-			grayValueCaches = new Double[outWidth][outHeight];
-			colorValueCaches = new Double[outWidth][outHeight][3];
+			grayValueCaches = new Double[dimension.getOutWidth()][dimension.getOutHeight()];
+			colorValueCaches = new Double[dimension.getOutWidth()][dimension.getOutHeight()][3];
 			
 			needInit = false;
 		}
@@ -135,8 +100,8 @@ public class ImageReader {
 			initParams();
 		}
 		
-		int x = toLT0Pos(px, rx);
-		int y = toLT0Pos(py, ry);
+		int x = dimension.toLT0PosX(px);
+		int y = dimension.toLT0PosY(py);
 
 		if(grayValueCaches[x][y]==null){
 			grayValueCaches[x][y] = vToResulutionV(toGray(readColorOrigine(px, py)));
@@ -149,8 +114,8 @@ public class ImageReader {
 			initParams();
 		}
 
-		int x = toLT0Pos(px, rx);
-		int y = toLT0Pos(py, ry);
+		int x = dimension.toLT0PosX(px);
+		int y = dimension.toLT0PosY(py);
 
 		if(colorValueCaches[x][y][0]==null){
 			double[] color = vToResulutionV(readColorOrigine(px, py));
@@ -170,8 +135,8 @@ public class ImageReader {
 	public int[] readColorOrigine(int px, int py){
 		initParams();
 		
-		int x = toLT0Pos(px, rx);
-		int y = toLT0Pos(py, ry);
+		int x = dimension.toLT0PosX(px);
+		int y = dimension.toLT0PosY(py);
 
 		int count = 0;
 		int[] values = new int[3];

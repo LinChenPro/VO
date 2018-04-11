@@ -46,10 +46,10 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 import javax.swing.JFrame;
 
-import imagetransform.VirtualPoint;
 import originalvibs.HarmonicSeries;
 import originalvibs.SHMVibration;
 import originalvibs.VariationF;
+import virtualpresentation.VirtualPoint;
 import visionaudio.outils.WaveFileWriter;
 import visionaudio.outils.format.DataTransformer;
 

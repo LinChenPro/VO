@@ -2,6 +2,8 @@ package visionaudio;
 
 import java.util.Random;
 
+import virtualpresentation.VirtualDimension;
+
 public class SimpleWaveMaker extends WaveMaker {
 
 	public SimpleWaveMaker(WaveFormat waveFormat, ImageReader imageReader, int maxVolume) {
@@ -34,11 +36,12 @@ public class SimpleWaveMaker extends WaveMaker {
 	Double[][] startTimes;
 
 	double getStartTime(int x, int y){
+		VirtualDimension readerDimension = imageReader.getDimension();
 		if(startTimes==null){
-			startTimes = new Double[imageReader.getOutWidth()][imageReader.getOutHeight()];
+			startTimes = new Double[readerDimension.getOutWidth()][readerDimension.getOutHeight()];
 		}
-		x = imageReader.toLT0Pos(x, imageReader.getRx());
-		y = imageReader.toLT0Pos(y, imageReader.getRy());
+		x = readerDimension.toLT0PosX(x);
+		y = readerDimension.toLT0PosY(y);
 		if(startTimes[x][y]==null){
 			startTimes[x][y] = rdm.nextDouble() * (2 - getOneSoundDuration());
 		}
@@ -60,8 +63,8 @@ public class SimpleWaveMaker extends WaveMaker {
 	public double[] getPixelGrayWaveValue(int x, int y, double gray, double t) {
 		double s = 5;
 		
-		double mX = s*x/(double)imageReader.getRx();
-		double mY = s*y/(double)imageReader.getRy();
+		double mX = s*x/(double)imageReader.getDimension().getRx();
+		double mY = s*y/(double)imageReader.getDimension().getRy();
 		
 		double eX = 0.1;
 		double v = 340;
