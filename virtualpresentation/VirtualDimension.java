@@ -59,5 +59,13 @@ public class VirtualDimension {
 		return toLT0Pos(py, ry);
 	}
 		
+	public int toC0PosX(int x){
+		return toC0Pos(x, rx);
+	}
+	
+	public int toC0PosY(int y){
+		return toC0Pos(y, ry);
+	}
+	
 
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import virtualpresentation.VirtualDimension;
+import virtualpresentation.VirtualPoint;
 
 public class ImageReader {
 	private int resolution;
@@ -155,6 +156,15 @@ public class ImageReader {
 		}
 
 		return values;
+	}
+
+	public void readToPoint(VirtualPoint pXY) {
+		int x = pXY.getX();
+		int y = pXY.getY();
+		pXY.setColor(readColor(x, y));
+		pXY.setGray(readGray(x, y));
+
+		
 	}
 
 	
