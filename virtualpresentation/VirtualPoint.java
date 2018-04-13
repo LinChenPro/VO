@@ -9,7 +9,7 @@ public class VirtualPoint {
 	int x;
 	int y;
 	double[] color;
-	double gray; 
+	Double gray; 
 	
 	VirtualImage vImage;
 	
@@ -45,10 +45,10 @@ public class VirtualPoint {
 	public void setColor(double[] color) {
 		this.color = color;
 	}
-	public double getGray() {
+	public Double getGray() {
 		return gray;
 	}
-	public void setGray(double gray) {
+	public void setGray(Double gray) {
 		this.gray = gray;
 	}
 	public int getX() {
@@ -63,6 +63,25 @@ public class VirtualPoint {
 	public void setY(int y) {
 		this.y = y;
 	}
+	public ComplexVibration getOriginalVib() {
+		return originalVib;
+	}
+	public void setOriginalVib(ComplexVibration originalVib) {
+		this.originalVib = originalVib;
+	}
+	public double[][] getUnifiedSteroOutput() {
+		return unifiedSteroOutput;
+	}
+	public void setUnifiedSteroOutput(double[][] unifiedSteroOutput) {
+		this.unifiedSteroOutput = unifiedSteroOutput;
+	}
+	public List<AtomicWave> getDisplaySeries() {
+		return displaySeries;
+	}
+	public void setDisplaySeries(List<AtomicWave> displaySeries) {
+		this.displaySeries = displaySeries;
+	}
 	
-
+	
+	
 }

@@ -33,6 +33,7 @@ public class ImageReader {
 
 	public void setDimension(VirtualDimension dimension) {
 		this.dimension = dimension;
+		needInit = true;
 	}
 
 	public BufferedImage getSourceImage() {
@@ -163,7 +164,6 @@ public class ImageReader {
 		int y = pXY.getY();
 		pXY.setColor(readColor(x, y));
 		pXY.setGray(readGray(x, y));
-
 		
 	}
 

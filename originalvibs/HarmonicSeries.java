@@ -15,6 +15,10 @@ public class HarmonicSeries extends ComplexVibration {
 		this.f0 = f0;
 		this.serisLength = serisLength;
 	}
+	
+	public void setF0(double f0){
+		this.f0 = f0;
+	}
 
 	@Override
 	public void initVibList() {
@@ -34,5 +38,12 @@ public class HarmonicSeries extends ComplexVibration {
 		}
 
 	}
+
+	@Override
+	public ComplexVibration getInstance() {
+		return new HarmonicSeries(f0, serisLength, duration, readingSimpleRate);
+	}
+	
+	
 
 }

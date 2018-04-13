@@ -9,6 +9,7 @@ public abstract class ComplexVibration {
 	double duration;
 	
 	public abstract void initVibList();
+	public abstract ComplexVibration getInstance();
 	
 	public ComplexVibration(double duration, Integer readingSimpleRate) {
 		this.readingSimpleRate = readingSimpleRate;
@@ -31,6 +32,10 @@ public abstract class ComplexVibration {
 
 	public double getDuration() {
 		return duration;
+	}
+
+	public int getDurationInFrame() {
+		return new Double(getReadingSimpleRate() * getDuration()).intValue();
 	}
 
 	public void setDuration(double duration) {
