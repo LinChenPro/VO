@@ -1,5 +1,7 @@
 package transformplans.outputplan;
 
+import hrir.HRIRDoubleArrays;
+import virtualpresentation.VirtualDimension;
 import virtualpresentation.VirtualPoint;
 
 public class SteroHROutputPlan extends UnifiedOutputPlan{	
@@ -23,6 +25,10 @@ public class SteroHROutputPlan extends UnifiedOutputPlan{
 //			tR += impulse[i][1];
 //		}
 		
+		double[] vibValues = new double[durationInFrame];
+		for(int i=0; i<durationInFrame; i++){
+			vibValues[i] = pXY.getOriginalVib().readSByFrame(i);
+		}
 		for(int i=0; i<output.length; i++){
 			double impIL = 0;
 			double impIR = 0;
@@ -31,7 +37,8 @@ public class SteroHROutputPlan extends UnifiedOutputPlan{
 				if(a<0){
 					break;
 				}
-				double vibS = pXY.getOriginalVib().readSByFrame(a);
+//				double vibS = pXY.getOriginalVib().readSByFrame(a);
+				double vibS = vibValues[a];
 				impIL += vibS * impulse[j][0];
 				impIR += vibS * impulse[j][1];
 			}
@@ -50,13 +57,7 @@ public class SteroHROutputPlan extends UnifiedOutputPlan{
 	}
 	
 	public double[][] getimpulse(VirtualPoint pXY){
-		//	TODO read files to get real impulse values.
-		double[][] impulse = new double[impulseSize][2];
-		for(int i=0; i<impulse.length; i++){
-			impulse[i][0] = 1d;
-			impulse[i][1] = 1d;
-		}
-		return impulse;
+		return HRIRDoubleArrays.getImpulse(pXY);
 	}
 	
 //	for test, no need to keep

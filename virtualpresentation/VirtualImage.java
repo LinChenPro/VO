@@ -169,7 +169,7 @@ public class VirtualImage {
 	}
 
 	public static void main(String[] args) {
-		String imgPath = "C:/Users/lchen/tests/Penguins.jpg";
+		String imgPath = "/home/chen/searchprojets/resource/test.png";
 		File file= new File(imgPath);
 		BufferedImage bi = null;
 		try{
@@ -180,7 +180,7 @@ public class VirtualImage {
 		int sampleRate = 44100;
 		AudioFormat outputFormat = new AudioFormat(sampleRate, 16, 2, true, true);
 
-		HarmonicSeries vibType = new HarmonicSeries(800, 5, 0.01, sampleRate);
+		HarmonicSeries vibType = new HarmonicSeries(800, 5, 0.1, sampleRate);
 		OriginalVibDefinePlan vibPlan = new FreqYVibPlan<HarmonicSeries>(800, 200, vibType); 
 		
 		UnifiedOutputPlan outputPlan = new SteroHROutputPlan();
@@ -198,7 +198,7 @@ public class VirtualImage {
 			System.out.println(data[0]);
 			System.out.println(data[1]);
 			System.out.println();
-		}
+		}		
 	}
 	
 }
