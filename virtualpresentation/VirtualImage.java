@@ -6,6 +6,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFormat;
 
+import mediaformat.ImageReader;
 import originalvibs.HarmonicSeries;
 import transformplans.VOTransformPlan;
 import transformplans.displayplans.DisplaySeriesFeedPlan;
@@ -14,7 +15,6 @@ import transformplans.outputplan.SteroHROutputPlan;
 import transformplans.outputplan.UnifiedOutputPlan;
 import transformplans.vibplans.FreqYVibPlan;
 import transformplans.vibplans.OriginalVibDefinePlan;
-import visionaudio.ImageReader;
 
 public class VirtualImage {
 	VirtualDimension dimension;

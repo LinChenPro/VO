@@ -1,4 +1,4 @@
-package visionaudio.outils.format;
+package mediaformat.outils.format;
 
 import javax.sound.sampled.AudioFormat;
 

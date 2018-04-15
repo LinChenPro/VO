@@ -1,8 +1,8 @@
-package visionaudio;
+package mediaformat;
 
 public class WaveFormat {
-	static final int BIG_ENDIAN = 0;
-	static final int LITTLE_ENDIAN = 0;
+	static public final int BIG_ENDIAN = 0;
+	static public final int LITTLE_ENDIAN = 0;
 	
 	int simpleRate;
 	int frameSize;

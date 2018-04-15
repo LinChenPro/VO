@@ -2,8 +2,8 @@ package virtualpresentation;
 
 import java.util.List;
 
+import mediaformat.ImageReader;
 import originalvibs.ComplexVibration;
-import visionaudio.ImageReader;
 
 public class VirtualPoint {
 	int x;

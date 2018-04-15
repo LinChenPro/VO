@@ -1,4 +1,4 @@
-package visionaudio;
+package mediaformat;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

@@ -1,4 +1,4 @@
-package visionaudio;
+package mediaformat;
 
 import virtualpresentation.VirtualDimension;
 import virtualpresentation.VirtualPoint;

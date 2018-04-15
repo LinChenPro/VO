@@ -1,4 +1,4 @@
-package visionaudio.outils.format;
+package mediaformat.outils.format;
 
 public interface Encoder{
 	public int setBytes(int value, byte[]bytes, int offset, int size);
