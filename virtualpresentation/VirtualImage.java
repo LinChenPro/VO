@@ -66,6 +66,9 @@ public class VirtualImage {
 		this.outputFormat = outputFormat;
 	}
 
+	public int getSimpleRate(){
+		return new Float(getOutputFormat().getSampleRate()).intValue();
+	}
 	
 	public <T> T getMatrixValue(T[][] matrix, int px, int py){
 		return matrix[dimension.toLT0PosX(px)][dimension.toLT0PosY(py)];
@@ -107,8 +110,12 @@ public class VirtualImage {
 	}
 	
 
-	
 	public double[][] readFrame(int beginFrame, int size){
+		return readFrame(beginFrame, size, 1);
+	}
+	
+	
+	public double[][] readFrame(int beginFrame, int size, int volume){
 		if(beginFrame+size > this.transformPlan.getDisplayPlan().getLengthWithMargeInFrame(this)){
 			return null;
 		}
@@ -139,8 +146,8 @@ public class VirtualImage {
 				vRight /= validPointCount;
 			}
 			
-			output[i][0] = vLeft;
-			output[i][1] = vRight;
+			output[i][0] = vLeft*volume;
+			output[i][1] = vRight*volume;
 		}
 		
 		return output;
@@ -199,6 +206,10 @@ public class VirtualImage {
 			System.out.println(data[1]);
 			System.out.println();
 		}		
+	}
+
+	public int getDataLength() {
+		return getTransformPlan().getDisplayPlan().getLengthWithMargeInFrame(this);
 	}
 	
 }

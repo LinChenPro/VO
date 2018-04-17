@@ -27,6 +27,7 @@ public class FreqYVibPlan<T extends ComplexVibration> extends OriginalVibDefineP
 		if(vibType instanceof HarmonicSeries){
 			double f = fCenter - fRange * pXY.getY() / pXY.getImage().getDimension().getRy();
 			((HarmonicSeries)vib).setF0(f);
+			vib.initVibList();
 			pXY.setOriginalVib(vib);
 		}
 	}

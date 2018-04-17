@@ -42,10 +42,10 @@ public class SteroHROutputPlan extends UnifiedOutputPlan{
 				impIL += vibS * impulse[j][0];
 				impIR += vibS * impulse[j][1];
 			}
-//			output[i][0] = impIL/tL;
-//			output[i][1] = impIR/tR;
-			output[i][0] = impIL/impulse.length;
-			output[i][1] = impIR/impulse.length;
+			output[i][0] = impIL;
+			output[i][1] = impIR;
+//			output[i][0] = impIL/impulse.length;
+//			output[i][1] = impIR/impulse.length;
 		}
 		// convolution end
 		
