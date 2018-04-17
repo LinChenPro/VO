@@ -26,6 +26,7 @@ public class HarmonicSeries extends ComplexVibration {
 
 	@Override
 	public void initVibList() {
+		vibList.clear();
 		for(int i=1; i<=serisLength; i++){
 //			if(i==2)continue;
 			SHMVibration vibI = new SHMVibration();

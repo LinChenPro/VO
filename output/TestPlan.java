@@ -42,12 +42,12 @@ public class TestPlan {
 		int sampleRate = 44100;
 		AudioFormat outputFormat = new AudioFormat(sampleRate, 16, 2, true, true);
 
-		HarmonicSeries vibType = new HarmonicSeries(600, 4, 0.02, sampleRate);
+		HarmonicSeries vibType = new HarmonicSeries(0, 4, 0.01, sampleRate);
 		OriginalVibDefinePlan vibPlan = new FreqYVibPlan<HarmonicSeries>(600, 200, vibType); 
 		
 		UnifiedOutputPlan outputPlan = new SteroHROutputPlan();
 //		DisplaySeriesFeedPlan displayPlan = new TimeXDisplayPlan2();
-		DisplaySeriesFeedPlan displayPlan = new TimeRandomDisplayPlan(reader.getDimension(), 5);
+		DisplaySeriesFeedPlan displayPlan = new TimeRandomDisplayPlan(reader.getDimension(), 1);
 		
 		VOTransformPlan transformPlan = new VOTransformPlan(vibPlan, outputPlan, displayPlan);
 		
@@ -62,9 +62,10 @@ public class TestPlan {
 	public static void main(String[] args) {
 		TestPlan plan = new TestPlan();
 		plan.initImage();
-		TestLancer.lanceInGUI(plan);
+		System.out.println(plan.getVirtualImage().getDataDuration());
+		TestLancer.lanceInGUI(plan, 1000);
 		
-//		TestLancer.saveAsWav(plan);
+//		TestLancer.saveAsWav(plan, 5);
 		
 		System.out.println("finished");
 	}

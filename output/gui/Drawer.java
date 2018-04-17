@@ -186,15 +186,18 @@ public class Drawer{
 		return new Double(255 * v).intValue();
 	}
 
-	public void show(){
+	public void show(String[] args){
 //		testImgReader();
 //		testSimpleWaveMaker_Points();
 //		testSimpleWaveMaker_Image();
 //		testSimpleWaveMaker_toFile();
 //		testSingleVibration();
 //		testComplexVibration();
-		
-		
+			
+	}
+
+	public void show(){
+		show(null);
 	}
 
 	static Date crtTime = new Date();

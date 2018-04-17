@@ -35,7 +35,7 @@ public class ShowWindow {
 //				g.setColor(Color.white);
 //				g.fillRect(0, 0, w, h);
 				Drawer dr = new TestLancer(w, h, g);
-				dr.show();
+				dr.show(args);
 			}
 		};
 		cvs.setSize(w, h);

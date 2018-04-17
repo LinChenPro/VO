@@ -22,6 +22,11 @@ public class TestLancer extends Drawer{
 	public static TestPlan currentTestPlan;
 
 	public static void saveAsWav(TestPlan testPlan){
+		double dataDuration = testPlan.getVirtualImage().getDataDuration();
+		saveAsWav(testPlan, dataDuration);
+	}
+
+	public static void saveAsWav(TestPlan testPlan, double duration){
 		currentTestPlan = testPlan;
 		VirtualImage vImg = currentTestPlan.getVirtualImage();
 		if(vImg==null){
@@ -38,7 +43,7 @@ public class TestLancer extends Drawer{
 		int volume = 20;
 		
 		int step = 441;
-		int dataLength = vImg.getDataLength();
+		int dataLength = new Double(currentTestPlan.getVirtualImage().getOutputFormat().getSampleRate() * duration).intValue();
 		
 		long t = System.currentTimeMillis();
 		for(int i=0; i<dataLength; i+=step){
@@ -57,16 +62,24 @@ public class TestLancer extends Drawer{
 	
 	
 	public static void lanceInGUI(TestPlan testPlan){
+		lanceInGUI(testPlan, 0);
+	}
+	
+	public static void lanceInGUI(TestPlan testPlan, int beginFrame){
 		currentTestPlan = testPlan;
-		
-		ShowWindow.main(null);
+		ShowWindow.main(new String[]{Integer.toString(beginFrame)});
 	}
 	
 	
-	public void show(){
+	public void show(String[] args){
 		VirtualImage vImg = currentTestPlan.getVirtualImage();
 		if(vImg==null){
 			return;
+		}
+
+		int beginFrame = 0;
+		if(args!=null && args.length>0){
+			beginFrame = Integer.parseInt(args[0]);
 		}
 		
 		int yl = h/4;
@@ -78,8 +91,8 @@ public class TestLancer extends Drawer{
 
 		int step = 1;//vImg.getSimpleRate()/w;
 		int max = 256 * 256;
-		for(int i=0; i<vImg.getSimpleRate()/step; i++){
-			double[] vi = vImg.readFrame(i*step, 1)[0];
+		for(int i=0; i<w; i++){
+			double[] vi = vImg.readFrame((i+beginFrame)*step, 1)[0];
 			if(pl!=null){
 				pt.drawLine(i-1, pl+yl, i, new Double(max*vi[0]).intValue()+yl);
 			}

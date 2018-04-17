@@ -110,22 +110,32 @@ public class VirtualImage {
 	}
 	
 
-	public double[][] readFrame(int beginFrame, int size){
-		return readFrame(beginFrame, size, 1);
+	public double[][] readFrameNoLoop(int beginFrame, int size){
+		return readFrameNoLoop(beginFrame, size, 1);
 	}
-	
-	
-	public double[][] readFrame(int beginFrame, int size, int volume){
-		if(beginFrame+size > this.transformPlan.getDisplayPlan().getLengthWithMargeInFrame(this)){
+		
+	public double[][] readFrameNoLoop(int beginFrame, int size, int volume){
+		if(beginFrame >= this.transformPlan.getDisplayPlan().getLengthWithMargeInFrame(this)){
 			return null;
 		}
 		
 		int realSize = Math.min(size, this.transformPlan.getDisplayPlan().getLengthWithMargeInFrame(this) - beginFrame);
+		return readFrame(beginFrame, realSize);
+	}
+
+	
+	public double[][] readFrame(int beginFrame, int size){
+		return readFrame(beginFrame, size, 1);
+	}
 		
-		double[][] output = new double[realSize][2];
+	public double[][] readFrame(int beginFrame, int size, int volume){
 		
-		for(int i=0; i<realSize; i++){
-			int frmIndex = beginFrame+i;
+		double[][] output = new double[size][2];
+		int maxFrmIndex = this.transformPlan.getDisplayPlan().getLengthWithMargeInFrame(this);
+		
+		for(int i=0; i<size; i++){
+			int frmIndex = (beginFrame+i)%maxFrmIndex;
+
 			double vLeft = 0;
 			double vRight = 0;
 			long validPointCount = 0;
@@ -210,6 +220,10 @@ public class VirtualImage {
 
 	public int getDataLength() {
 		return getTransformPlan().getDisplayPlan().getLengthWithMargeInFrame(this);
+	}
+	
+	public double getDataDuration() {
+		return getTransformPlan().getDisplayPlan().getLengthWithMargeInFrame(this)/getOutputFormat().getSampleRate();
 	}
 	
 }
