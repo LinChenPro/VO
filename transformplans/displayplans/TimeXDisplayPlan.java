@@ -48,11 +48,6 @@ public class TimeXDisplayPlan extends DisplaySeriesFeedPlan {
 
 		return loopLength * 3;
 	}
-
-	@Override
-	public int getLengthWithMargeInFrame(VirtualImage image) {
-		return getLengthInFrame(image) + image.getTransformPlan().getUnifiedOutputPlan().getMargeLength();
-	}
 	
 	
 

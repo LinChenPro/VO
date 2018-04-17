@@ -63,6 +63,12 @@ public class VirtualPoint {
 	public void setY(int y) {
 		this.y = y;
 	}
+	public int getI() {
+		return vImage.dimension.toLT0PosX(x) ;
+	}
+	public int getJ() {
+		return vImage.dimension.toLT0PosY(y) ;
+	}
 	public ComplexVibration getOriginalVib() {
 		return originalVib;
 	}

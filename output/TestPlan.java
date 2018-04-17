@@ -10,6 +10,7 @@ import mediaformat.ImageReader;
 import originalvibs.HarmonicSeries;
 import transformplans.VOTransformPlan;
 import transformplans.displayplans.DisplaySeriesFeedPlan;
+import transformplans.displayplans.TimeRandomDisplayPlan;
 import transformplans.displayplans.TimeXDisplayPlan2;
 import transformplans.outputplan.SteroHROutputPlan;
 import transformplans.outputplan.UnifiedOutputPlan;
@@ -26,7 +27,7 @@ public class TestPlan {
 
 	// first simple test
 	public void initImage(){
-		String imgPath = "/home/chen/searchprojets/resource/testCircle.png";
+		String imgPath = "C:\\Users\\lchen\\tests\\Penguins.jpg";
 //		String imgPath = "/home/chen/searchprojets/resource/testRegtrangle.png";
 //		String imgPath = "/home/chen/searchprojets/resource/testEmptyRegtrangle.png";
 		File file= new File(imgPath);
@@ -45,7 +46,8 @@ public class TestPlan {
 		OriginalVibDefinePlan vibPlan = new FreqYVibPlan<HarmonicSeries>(600, 200, vibType); 
 		
 		UnifiedOutputPlan outputPlan = new SteroHROutputPlan();
-		DisplaySeriesFeedPlan displayPlan = new TimeXDisplayPlan2();
+//		DisplaySeriesFeedPlan displayPlan = new TimeXDisplayPlan2();
+		DisplaySeriesFeedPlan displayPlan = new TimeRandomDisplayPlan(reader.getDimension(), 5);
 		
 		VOTransformPlan transformPlan = new VOTransformPlan(vibPlan, outputPlan, displayPlan);
 		
@@ -60,10 +62,11 @@ public class TestPlan {
 	public static void main(String[] args) {
 		TestPlan plan = new TestPlan();
 		plan.initImage();
-//		TestLancer.lanceInGUI(plan);
+		TestLancer.lanceInGUI(plan);
 		
-		TestLancer.saveAsWav(plan);
+//		TestLancer.saveAsWav(plan);
 		
+		System.out.println("finished");
 	}
 	
 }

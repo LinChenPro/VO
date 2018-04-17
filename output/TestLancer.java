@@ -77,7 +77,7 @@ public class TestLancer extends Drawer{
 		Integer pr = null;
 
 		int step = 1;//vImg.getSimpleRate()/w;
-		int max = 65536;
+		int max = 256 * 256;
 		for(int i=0; i<vImg.getSimpleRate()/step; i++){
 			double[] vi = vImg.readFrame(i*step, 1)[0];
 			if(pl!=null){
